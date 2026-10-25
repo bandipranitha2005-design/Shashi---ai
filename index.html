@@ -1,107 +1,110 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta name="google-site-verification" content="oI9tHHgbrjqs2eMmXIjnWE0XaYlb-L8kP5B2I8TgT90" />
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#111827">
-<meta name="description" content="Shashi AI — your personal AI workspace prototype">
-<link rel="manifest" href="manifest.json">
-<title>Shashi AI</title>
-<style>
-:root{--bg:#0b1020;--panel:#111a2e;--panel2:#17223a;--text:#edf2ff;--muted:#a5b4d0;--accent:#8b7cff;--accent2:#42d9c8;--border:#263451}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#20245a 0,transparent 32%),var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
-button,input,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:10px 14px;background:var(--accent);color:white;font-weight:650}button.secondary{background:var(--panel2);border:1px solid var(--border);color:var(--text)}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}
-.app{max-width:1180px;margin:auto;padding:18px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.brand{display:flex;align-items:center;gap:11px}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:22px;font-weight:900;color:#09111f;box-shadow:0 8px 30px #5147bb55}.brand h1{font-size:21px;margin:0}.brand p{margin:0;color:var(--muted);font-size:12px}.pill{font-size:12px;border:1px solid #2d685f;color:#9af5e6;border-radius:99px;padding:5px 9px}
-.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:16px}.side,.main{background:#10182adf;border:1px solid var(--border);border-radius:20px;overflow:hidden}.side{padding:14px;height:fit-content}.side h3{font-size:12px;text-transform:uppercase;letter-spacing:1.3px;color:var(--muted);margin:8px 8px 10px}.nav{display:flex;flex-direction:column;gap:6px}.nav button{display:flex;gap:10px;align-items:center;text-align:left;background:transparent;color:var(--muted);font-weight:600}.nav button.active,.nav button:hover{background:var(--panel2);color:var(--text)}.side-note{margin:18px 7px 4px;color:var(--muted);font-size:12px}
-.main{min-height:650px;display:flex;flex-direction:column}.view{display:none;flex:1;min-height:0}.view.active{display:flex;flex-direction:column}.viewhead{padding:22px 22px 14px;border-bottom:1px solid var(--border)}.viewhead h2{margin:0 0 3px;font-size:21px}.viewhead p{margin:0;color:var(--muted);font-size:13px}.chatlog{padding:20px;display:flex;flex-direction:column;gap:13px;flex:1;overflow:auto;min-height:280px;max-height:52vh}.msg{max-width:88%;padding:12px 14px;border-radius:16px;white-space:pre-wrap;overflow-wrap:anywhere}.msg.bot{align-self:flex-start;background:var(--panel2);border:1px solid var(--border)}.msg.user{align-self:flex-end;background:linear-gradient(135deg,#6558d9,#426bd8);color:white}.msg small{display:block;color:var(--muted);font-size:10px;margin-bottom:3px}.composer{padding:14px 18px 18px;border-top:1px solid var(--border)}.composer form{display:flex;gap:9px}.composer input,.field,textarea{width:100%;background:#0b1222;color:var(--text);border:1px solid var(--border);border-radius:12px;padding:12px}.hint{color:var(--muted);font-size:11px;margin:8px 3px 0}.quick{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 16px}.quick button{font-size:12px;padding:8px 10px}
-.content{padding:20px;gap:14px}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.feature{padding:16px;background:var(--panel2);border:1px solid var(--border);border-radius:16px}.feature .ico{font-size:23px}.feature h3{margin:6px 0 4px;font-size:15px}.feature p{margin:0;color:var(--muted);font-size:13px}.noteform{display:grid;gap:10px}.noteform textarea{min-height:110px;resize:vertical}.noteitem,.taskitem{padding:13px;background:var(--panel2);border:1px solid var(--border);border-radius:13px;margin-top:10px;overflow-wrap:anywhere}.noteitem p{margin:4px 0 0;color:var(--muted);white-space:pre-wrap}.taskrow{display:flex;gap:8px}.taskrow input{flex:1;min-width:0}.taskitem{display:flex;align-items:center;gap:10px}.taskitem span{flex:1}.taskitem.done span{text-decoration:line-through;color:var(--muted)}.smallbtn{padding:6px 9px;font-size:12px}.footer{padding:14px;text-align:center;color:var(--muted);font-size:11px}
-@media(max-width:700px){.app{padding:10px}.layout{grid-template-columns:1fr}.side{padding:9px}.side h3,.side-note{display:none}.nav{flex-direction:row;overflow:auto}.nav button{white-space:nowrap;padding:9px 11px}.main{min-height:70vh}.cards{grid-template-columns:1fr}.chatlog{max-height:48vh}.pill{display:none}.viewhead{padding:17px}.content{padding:14px}.msg{max-width:95%}}
-</style>
-</head>
-<body>
-<div class="app">
-<header class="top">
-  <div class="brand"><div class="logo">S</div><div><h1>Shashi AI</h1><p>Your ideas. One intelligent workspace.</p></div></div>
-  <span class="pill">FIRST WORKING PROTOTYPE</span>
-</header>
-<div class="layout">
-  <aside class="side">
-    <h3>Workspace</h3>
-    <nav class="nav">
-      <button class="active" data-view="chat">✦ <span>AI Chat</span></button>
-      <button data-view="notes">▤ <span>My Notes</span></button>
-      <button data-view="tasks">✓ <span>Tasks</span></button>
-      <button data-view="tools">⚙ <span>AI Toolkit</span></button>
-    </nav>
-    <p class="side-note">Prototype v0.1<br>Saved notes and tasks stay on this device.</p>
-  </aside>
-  <main class="main">
-    <section class="view active" id="chat">
-      <div class="viewhead"><h2>What can I help with?</h2><p>Ask a question, practise English, or plan your next step.</p></div>
-      <div class="chatlog" id="chatlog" aria-live="polite">
-        <div class="msg bot"><small>SHASHI AI</small>Hi! I'm Shashi AI 👋 This is the first prototype. Try a prompt below. The chat currently uses a small built-in demo brain; it is not connected to a live AI model yet.</div>
-      </div>
-      <div class="quick">
-        <button class="secondary" data-prompt="Help me practise spoken English.">🗣️ Practise English</button>
-        <button class="secondary" data-prompt="Make a simple study plan for today.">📚 Study plan</button>
-        <button class="secondary" data-prompt="Give me a mature interview answer for handling a rude customer.">💼 Interview help</button>
-        <button class="secondary" data-prompt="Explain artificial intelligence in simple words.">🤖 Explain AI</button>
-      </div>
-      <div class="composer"><form id="chatform"><input id="prompt" autocomplete="off" placeholder="Message Shashi AI..." aria-label="Message Shashi AI"><button type="submit">Send ↗</button></form><p class="hint">Demo only: don't enter passwords or private information.</p></div>
-    </section>
-    <section class="view" id="notes">
-      <div class="viewhead"><h2>My Notes</h2><p>Keep ideas, reminders, and learning notes on this device.</p></div>
-      <div class="content">
-        <form class="noteform" id="noteform"><input class="field" id="notetitle" placeholder="Note title" required><textarea id="notebody" placeholder="Write your note..." required></textarea><button type="submit">Save note</button></form>
-        <div id="noteslist"></div>
-      </div>
-    </section>
-    <section class="view" id="tasks">
-      <div class="viewhead"><h2>My Tasks</h2><p>Add a task and mark it complete when you're done.</p></div>
-      <div class="content"><form class="taskrow" id="taskform"><input class="field" id="tasktext" placeholder="What do you need to do?" required><button type="submit">Add</button></form><div id="tasklist"></div></div>
-    </section>
-    <section class="view" id="tools">
-      <div class="viewhead"><h2>AI Toolkit</h2><p>Planned features for future versions of Shashi AI.</p></div>
-      <div class="content">
-        <div class="cards">
-          <article class="feature"><div class="ico">🌐</div><h3>Web research</h3><p>Search the web and summarise reliable sources. Requires a search integration.</p></article>
-          <article class="feature"><div class="ico">🎨</div><h3>Image studio</h3><p>Generate or edit images using a connected image model.</p></article>
-          <article class="feature"><div class="ico">🎙️</div><h3>Voice mode</h3><p>Speech-to-text and spoken replies with user permission.</p></article>
-          <article class="feature"><div class="ico">📄</div><h3>File assistant</h3><p>Upload and summarise PDFs or documents after secure file support is added.</p></article>
-          <article class="feature"><div class="ico">💻</div><h3>Coding helper</h3><p>Draft, explain, and debug code in a future connected version.</p></article>
-          <article class="feature"><div class="ico">🔒</div><h3>Privacy first</h3><p>Keep API keys on a secure server—not inside public website code.</p></article>
-        </div>
-        <div class="feature"><h3>Next build step</h3><p>Connect a real AI API through a small backend, add sign-in only if needed, then deploy the site and install it on Android as a PWA. Free API quotas can change and are limited.</p></div>
-      </div>
-    </section>
-  </main>
-</div>
-<div class="footer">Shashi AI • Built as a starter prototype • Not affiliated with OpenAI or Google</div>
-</div>
-<script>
-const $=s=>document.querySelector(s);
-const $$=s=>document.querySelectorAll(s);
-$$('[data-view]').forEach(b=>b.addEventListener('click',()=>{ $$('[data-view]').forEach(x=>x.classList.toggle('active',x===b)); $$('.view').forEach(v=>v.classList.toggle('active',v.id===b.dataset.view)); }));
-function addMsg(text,who){const el=document.createElement('div');el.className='msg '+who;const label=document.createElement('small');label.textContent=who==='user'?'YOU':'SHASHI AI';el.append(label,document.createTextNode(text));$('#chatlog').append(el);$('#chatlog').scrollTop=$('#chatlog').scrollHeight;}
-function demoAnswer(q){const s=q.toLowerCase();
-if(s.includes('english'))return 'Let’s practise! Try saying: “Good morning. My name is ____. I am improving my communication skills, and I enjoy learning new things.” Send me your version and I can help polish it. (Demo response)';
-if(s.includes('study')||s.includes('plan'))return 'A simple plan: 1) Choose one important topic. 2) Study for 25 minutes. 3) Take a 5-minute break. 4) Practise 5 questions. 5) Review what you learned. Adjust this plan to your schedule. (Demo response)';
-if(s.includes('rude customer')||s.includes('interview'))return '“I would stay calm, listen carefully without interrupting, and understand the customer’s concern. I would apologise for the inconvenience, explain the available solution clearly, and follow company policy. If needed, I would escalate the issue to the right person.” (Demo response)';
-if(s.includes('artificial intelligence')||s==='what is ai')return 'Artificial Intelligence (AI) is technology that helps computers perform tasks such as understanding language, recognising images, and finding patterns. This prototype is not yet connected to a real AI model. (Demo response)';
-if(s.includes('hello')||s.includes('hlo')||s.includes('hi'))return 'Hello! Welcome to Shashi AI. I’m a starter demo right now. Ask about English practice, study planning, or interview preparation.';
-return 'Thanks for your message! This starter version can demonstrate the interface, notes, and tasks, but it cannot generate a full AI answer yet. The next step is connecting a real model through a secure backend. Your prompt was: “'+q.slice(0,180)+'”';}
-function send(q){q=q.trim();if(!q)return;addMsg(q,'user');$('#prompt').value='';setTimeout(()=>addMsg(demoAnswer(q),'bot'),180);}
-$('#chatform').addEventListener('submit',e=>{e.preventDefault();send($('#prompt').value);});
-$$('[data-prompt]').forEach(b=>b.addEventListener('click',()=>send(b.dataset.prompt)));
-function read(key){try{return JSON.parse(localStorage.getItem(key)||'[]')}catch{return []}}
-function write(key,v){localStorage.setItem(key,JSON.stringify(v))}
-function renderNotes(){const box=$('#noteslist');box.replaceChildren();const notes=read('shashi-notes');if(!notes.length){box.innerHTML='<p class="hint">No notes yet. Add your first note above.</p>';return;}notes.forEach((n,i)=>{const d=document.createElement('div');d.className='noteitem';const h=document.createElement('strong');h.textContent=n.title;const p=document.createElement('p');p.textContent=n.body;const del=document.createElement('button');del.className='secondary smallbtn';del.textContent='Delete';del.style.marginTop='8px';del.onclick=()=>{const a=read('shashi-notes');a.splice(i,1);write('shashi-notes',a);renderNotes()};d.append(h,p,del);box.append(d)})}
-$('#noteform').addEventListener('submit',e=>{e.preventDefault();const a=read('shashi-notes');a.unshift({title:$('#notetitle').value.trim(),body:$('#notebody').value.trim()});write('shashi-notes',a);$('#notetitle').value='';$('#notebody').value='';renderNotes()});
-function renderTasks(){const box=$('#tasklist');box.replaceChildren();const tasks=read('shashi-tasks');if(!tasks.length){box.innerHTML='<p class="hint">No tasks yet. Add something you want to finish.</p>';return;}tasks.forEach((t,i)=>{const d=document.createElement('div');d.className='taskitem'+(t.done?' done':'');const c=document.createElement('input');c.type='checkbox';c.checked=t.done;c.setAttribute('aria-label','Mark task complete');c.onchange=()=>{const a=read('shashi-tasks');a[i].done=c.checked;write('shashi-tasks',a);renderTasks()};const s=document.createElement('span');s.textContent=t.text;const del=document.createElement('button');del.className='secondary smallbtn';del.textContent='Delete';del.onclick=()=>{const a=read('shashi-tasks');a.splice(i,1);write('shashi-tasks',a);renderTasks()};d.append(c,s,del);box.append(d)})}
-$('#taskform').addEventListener('submit',e=>{e.preventDefault();const a=read('shashi-tasks');a.push({text:$('#tasktext').value.trim(),done:false});write('shashi-tasks',a);$('#tasktext').value='';renderTasks()});
-renderNotes();renderTasks();
-if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
-</script>
-</body>
-</html>
+
+const ALLOWED_ORIGIN = "https://bandipranitha2005-design.github.io";
+
+export default {
+  async fetch(request, env) {
+    const origin = request.headers.get("Origin") || "";
+    const headers = new Headers({
+      "Content-Type": "application/json; charset=utf-8",
+      "Vary": "Origin"
+    });
+
+    if (origin === ALLOWED_ORIGIN) {
+      headers.set("Access-Control-Allow-Origin", ALLOWED_ORIGIN);
+      headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+      headers.set("Access-Control-Allow-Headers", "Content-Type");
+    }
+
+    if (request.method === "OPTIONS") {
+      if (origin !== ALLOWED_ORIGIN) {
+        return new Response("Origin not allowed", { status: 403 });
+      }
+      return new Response(null, { status: 204, headers });
+    }
+
+    if (request.method === "GET") {
+      return new Response(
+        JSON.stringify({ message: "Shashi AI API is ready!" }),
+        { headers }
+      );
+    }
+
+    if (origin !== ALLOWED_ORIGIN) {
+      return new Response(
+        JSON.stringify({ error: "Origin not allowed" }),
+        { status: 403, headers }
+      );
+    }
+
+    if (request.method !== "POST") {
+      return new Response(
+        JSON.stringify({ error: "Method not allowed" }),
+        { status: 405, headers }
+      );
+    }
+
+    try {
+      const body = await request.json();
+      const message = String(body.message || "").trim();
+
+      if (!message) {
+        return new Response(
+          JSON.stringify({ error: "Please enter a message." }),
+          { status: 400, headers }
+        );
+      }
+
+      if (!env.GEMINI_API_KEY) {
+        return new Response(
+          JSON.stringify({ error: "Gemini API secret is missing." }),
+          { status: 500, headers }
+        );
+      }
+
+      const response = await fetch(
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-goog-api-key": env.GEMINI_API_KEY
+          },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [
+                  {
+                    text: "You are Shashi AI, a helpful assistant. Answer clearly and simply. User message: " + message
+                  }
+                ]
+              }
+            ]
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        return new Response(
+          JSON.stringify({
+            error: data?.error?.message || "Gemini request failed."
+          }),
+          { status: 502, headers }
+        );
+      }
+
+      const reply = data?.candidates?.[0]?.content?.parts
+        ?.map(part => part.text || "")
+        .join("") || "Sorry, I couldn't generate a reply.";
+
+      return new Response(JSON.stringify({ reply }), { headers });
+
+    } catch (error) {
+      return new Response(
+        JSON.stringify({ error: "Request failed. Please try again." }),
+        { status: 500, headers }
+      );
+    }
+  }
+};
